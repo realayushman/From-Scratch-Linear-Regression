@@ -42,6 +42,9 @@ class SGDRegression:
     self.intercept=None
     self.lr=lr
     self.epoch=epoch
+    t0,t1=5,50
+  def learning_rate(self,t):
+    return self.t0/(t+self.t1)
   def fit(self,x,y):
     n=x.shape[0]
     self.intercept=0
@@ -50,6 +53,7 @@ class SGDRegression:
     #print(self.coef.shape)
     for i in range(self.epoch):
       for j in range(x.shape[0]):
+        lr=self.learning_rate(i*x.shape[0]+j)
         #j=np.random.randint(0,self.epoch)
         #print(x[j].shape)
         y_pred=self.intercept+np.dot(self.coef,x[j])
